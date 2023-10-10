@@ -4,6 +4,7 @@ class Personaje{
     #nombre = "def nombre";
     #puntosAtaque = 0;
     #puntosVida = 0;
+    #color = COLOR_PERSONAJE;
 
     /**
      * Inicializa el objeto personaje
@@ -11,10 +12,11 @@ class Personaje{
      * @param {Number} puntosAtaque del personaje
      * @param {Number} puntosVida del personaje
      */
-    constructor(nombre, puntosAtaque, puntosVida){
+    constructor(nombre, puntosAtaque, puntosVida, color){
         this.#nombre = nombre;
         this.#puntosAtaque = puntosAtaque;
         this.#puntosVida = puntosVida;
+        this.#color = color;
     }
 
     getNombre(){
@@ -41,14 +43,14 @@ class Personaje{
     }
 
     atacaA(unEnemigo){
-        this.habla("Soy power ranger " + this.getNombre());
+        this.habla("Soy "+ this.constructor.name+ " " + this.getNombre());
         if (this.#puntosVida > 0) {
             if (unEnemigo.getPuntosVida() > 0) {
                 this.habla("Estoy atacando a "+ unEnemigo.getNombre());
                 this.habla("con "+ this.getPuntosAtaque() + " puntos ataque");
                 unEnemigo.defenderseDe(this);
             }else{
-                this.habla("El enemigo esta muy debil para pelear");
+                this.habla(unEnemigo.getNombre()+ " Esta muy debil para pelear");
             }
         }else{
             this.habla("No puedo atacar, estoy herido!");
@@ -56,16 +58,17 @@ class Personaje{
     }
 
     habla(msj) {
-        console.log(COLOR_PERSONAJE, msj);
+        console.log(this.#color, msj);
     }
 
     defenderseDe(enemigoAtacante){
-        this.habla("Soy power ranger "+ this.getNombre());
+        this.habla("Soy "+ this.constructor.name+ " " +  this.getNombre());
         this.habla("Me estoy defendiendo de "+ enemigoAtacante.getNombre());
         // this.#puntosVida-= powerRangerAtacante.getPuntosAtaque();
         this.setPuntosVida(this.getPuntosVida() - enemigoAtacante.getPuntosAtaque());
         if (this.getPuntosVida() > 0) {
             this.habla("Me quedan "+ this.getPuntosVida() + " puntos vida");
+            this.atacaA(enemigoAtacante);
         }else{
             this.habla("Estoy derrotado :(");
         }

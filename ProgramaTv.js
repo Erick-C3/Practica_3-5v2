@@ -10,7 +10,13 @@ class ProgramaTv{
     }
 
     iniciaEpisodio(){
-        this.#powerRangers[2].atacaA(this.#enemigos[0]);
+        this.#powerRangers.forEach(powerRanger => {
+            this.#enemigos.forEach(enemigo => {
+                powerRanger.atacaA(enemigo);
+                console.log(SEPARACION, "--------------");
+            });
+        });
+        /* this.#powerRangers[2].atacaA(this.#enemigos[0]);
         console.log(SEPARACION, "--------------");
         this.#powerRangers[0].atacaA(this.#enemigos[0]);
         console.log(SEPARACION, "--------------");
@@ -19,7 +25,7 @@ class ProgramaTv{
         console.log(SEPARACION, "--------------");
         this.#powerRangers[2].atacaA(this.#enemigos[1]);
         console.log(SEPARACION, "--------------");
-        this.#enemigos[0].atacaA(this.#powerRangers[2]);
+        this.#enemigos[0].atacaA(this.#powerRangers[2]); */
     }
 }
 
